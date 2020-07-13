@@ -1,10 +1,12 @@
 package com.lagou.dubbo.controller;
 
+import util.TheadLocalUtil;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.TellMyIpService;
+import service.TellMyIpService1;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,13 +22,15 @@ public class DubboTestController {
     @Reference(filter = {"filter"})
     private TellMyIpService tellMyIpService;
 
+    @Reference(filter = {"filter"})
+    private TellMyIpService1 tellMyIpService1;
 
     @RequestMapping
     @ResponseBody
     public String testInvoke(HttpServletRequest request) {
         //接受到客户端请求后获取客户端ip，并调用server接口。
-        String s = tellMyIpService.tellMyIp(request.getRemoteHost());
-        System.out.println("服务器返回：" + s);
+        tellMyIpService.tellMyIp();
+        tellMyIpService1.tellMyIp();
         return "invoke end";
     }
 }

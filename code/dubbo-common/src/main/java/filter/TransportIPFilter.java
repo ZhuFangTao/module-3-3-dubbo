@@ -3,6 +3,7 @@ package filter;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.*;
+import util.TheadLocalUtil;
 
 import java.util.Map;
 
@@ -20,8 +21,8 @@ public class TransportIPFilter implements Filter {
 
         //如果是客户端则将调用的ip设置进RpcContext
         if (RpcContext.getContext().isConsumerSide()) {
-            System.out.println("consume设置ip:" + invocation.getArguments()[0].toString());
-            RpcContext.getContext().setAttachment(IP, invocation.getArguments()[0].toString());
+            System.out.println("consume设置ip:" + TheadLocalUtil.getInstance().getIp());
+            RpcContext.getContext().setAttachment(IP, TheadLocalUtil.getInstance().getIp());
         } else {
             Map<String, String> contextAttachments = RpcContext.getContext().getAttachments();
             System.out.println("provider获取到ip：" + contextAttachments.get(IP));

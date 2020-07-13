@@ -2,6 +2,7 @@ package impl;
 
 import org.apache.dubbo.config.annotation.Service;
 import service.TellMyIpService;
+import service.TellMyIpService1;
 
 /**
  * \* @Author: ZhuFangTao
@@ -9,7 +10,7 @@ import service.TellMyIpService;
  * \
  */
 @Service(filter = {"filter","-monitorFilter"})
-public class TellMyIpServiceImpl implements TellMyIpService {
+public class TellMyIpServiceImpl implements TellMyIpService1 {
 
     public String tellMyIp() {
         return "got it,client ip is " ;
